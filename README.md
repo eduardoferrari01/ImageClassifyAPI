@@ -1,4 +1,5 @@
 # Convolutional neural network api
+[![CodeFactor](https://www.codefactor.io/repository/github/eduardoferrari01/convolutional-neural-network-api/badge/main)](https://www.codefactor.io/repository/github/eduardoferrari01/convolutional-neural-network-api/overview/main)
 
 Rede neural que classifica os animais
 
