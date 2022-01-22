@@ -2,11 +2,11 @@
 
 Rede neural que classifica os animais
 
-#Pré-requisitos para ambiente dev
+# Pré-requisitos para ambiente dev
 
 Instalar as dependências: pip install -r requirements-dev.txt
 
-#Rodando ambiente com Docker
+# Rodando ambiente com Docker
 
 docker build -t cnn-api .
 
