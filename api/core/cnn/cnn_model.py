@@ -1,38 +1,27 @@
+import torch
 from torch.autograd import Variable
 from torchvision import transforms, models
-import torch
 import torch.nn as nn
 from pathlib import Path
+from api.core.cnn.labels import Labels
 
 error = {"label": "unknown"}
 
+labels = Labels()
+
 
 def get_transforms():
-    return transforms.Compose([transforms.RandomResizedCrop(224),
-                               transforms.RandomHorizontalFlip(),
+    return transforms.Compose([transforms.Resize(256),
+                               transforms.CenterCrop(224),
                                transforms.ToTensor(),
                                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
-
-
-def get_classes():
-    return [{
-        "description": "Bothrops Alternatus",
-        "label": "bothrops-alternatus"},
-        {
-            "description": "Crotalus Durissus",
-            "label": "crotalus-durissus"
-        },
-        {
-            "description": "Lachesis muta",
-            "label": "lachesis-muta"
-        }]
 
 
 class CnnModel:
 
     def __init__(self):
         self.test_transforms = get_transforms()
-        self.classes = get_classes()
+        self.classes = labels.get()
         self.device = torch.device('cpu')
         self.cnn_model = self.load()
         self.error = {"label": "unknown"}
@@ -49,6 +38,7 @@ class CnnModel:
         return model_ft
 
     def classify(self, image):
+        image.thumbnail((250, 250))
         image_tensor = self.test_transforms(image).float()
         image_tensor = image_tensor.unsqueeze_(0)
         input_img = Variable(image_tensor)
@@ -57,15 +47,15 @@ class CnnModel:
         max_v, idx_max = torch.max(output, 1)
 
         print('Valor maximo: {}'.format(max_v.item()))
-        print('Id: {}'.format(idx_max.item()))
-
-        if max_v > 3.0:
+        print('Id: {}'.format(idx_max))
+        print(output)
+        if max_v > 2.5:
             animal = self.classes[idx_max]
             print('Animal: {}'.format(animal))
-            return animal
+            return {"label": animal}
 
         print('Animal unknown')
         return error
 
-    def get_classes(self):
+    def get_class_names(self):
         return self.classes

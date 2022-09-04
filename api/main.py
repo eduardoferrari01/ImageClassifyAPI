@@ -11,7 +11,7 @@ cnn = CnnModel()
 
 @app.get("/cnn/class/names")
 def get_class_names():
-    return cnn.get_classes()
+    return cnn.get_class_names()
 
 
 @app.post("/cnn/classify/")
