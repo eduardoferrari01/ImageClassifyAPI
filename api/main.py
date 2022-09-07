@@ -21,5 +21,5 @@ async def classify(file: bytes = File(...)):
 
 
 @app.get("/cnn/exists/label/{label}")
-def recognized_label(label):
+def exists_label(label):
     return label in cnn.get_class_names()
