@@ -14,7 +14,12 @@ def get_class_names():
     return cnn.get_class_names()
 
 
-@app.post("/cnn/classify/")
+@app.post("/cnn/classify")
 async def classify(file: bytes = File(...)):
     image = Image.open(io.BytesIO(file))
     return cnn.classify(image)
+
+
+@app.get("/cnn/exists/label/{label}")
+def recognized_label(label):
+    return label in cnn.get_class_names()
