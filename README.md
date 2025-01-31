@@ -1,5 +1,5 @@
-# Convolutional neural network api
-[![CodeFactor](https://www.codefactor.io/repository/github/eduardoferrari01/convolutional-neural-network-api/badge/main)](https://www.codefactor.io/repository/github/eduardoferrari01/convolutional-neural-network-api/overview/main)
+# ImageClassifyAPI
+Um serviço de API para classificação de animais em imagens usando redes neurais convolucionais (CNN).
 
 # Pré-requisitos para ambiente dev
 
